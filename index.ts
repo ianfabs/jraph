@@ -17,9 +17,9 @@ type JraphOptions = JraphQuery | JraphMutation;
 
 async function jraph(argv: JraphOptions){
     let url : string | Request = argv.url;
-    let headers : any = { 'Content-Type': 'application/json' };
+    let headers = { 'Content-Type': 'application/json' };
     let body = JSON.stringify( (argv instanceof JraphQuery) ? {query: argv.query} : {mutation: argv.mutation} );
-    let fetch_options : Object = {
+    let fetch_options = {
         headers,
         body: body,
         ...argv.options
