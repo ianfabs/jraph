@@ -16,16 +16,19 @@ abstract class JraphMutation implements JraphBasic{
 type JraphOptions = JraphQuery | JraphMutation;
 
 async function jraph(argv: JraphOptions){
-    let url : string | Request = argv.url;
-    let headers = { 'Content-Type': 'application/json' };
-    let body = JSON.stringify( (argv instanceof JraphQuery) ? {query: argv.query} : {mutation: argv.mutation} );
-    let fetch_options = {
+    const url : string | Request = argv.url;
+    const headers = { 'Content-Type': 'application/json' };
+    const body = JSON.stringify( (argv instanceof JraphQuery) ? {query: argv.query} : {mutation: argv.mutation} );
+    const fetch_options = {
         headers,
         body: body,
         ...argv.options
     };
-    // return (await fetch(url, fetch_options).then(res=>res.json())).data;
-    return fetch(url, fetch_options).then(res=>res.json());
+    const request = await fetch(url, fetch_options).then(res=>res.json());
+    return request.data;
+    /* 
+    * Ask kyle about wether I should return `request` or `request.data`
+    */
 }
 
 export default jraph;
