@@ -22,3 +22,6 @@ async function jraph(argv: JraphOptions){
     // return (await fetch(url, fetch_options).then(res=>res.json())).data;
     return fetch(url, fetch_options).then(res=>res.json());
 }
+
+export default jraph;
+export { JraphOptions }
