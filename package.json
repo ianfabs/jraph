@@ -5,7 +5,9 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsc && npm publish "
+    "build": "tsc",
+    "version": "tsc && npm publish",
+    "test": "mocha"
   },
   "keywords": [
     "graphql"
@@ -14,5 +16,12 @@
   "license": "MIT",
   "dependencies": {
     "typescript": "^3.1.6"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "es6-promise": "^4.2.5",
+    "isomorphic-fetch": "^2.2.1",
+    "mocha": "^5.2.0"
   }
 }
