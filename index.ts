@@ -1,3 +1,8 @@
+import es6 from 'es6-promise';
+es6.polyfill();
+
+import 'isomorphic-fetch';
+
 interface JraphBasic{
     url: string | Request;
     options: any;
@@ -26,7 +31,7 @@ async function jraph(argv: JraphOptions){
         ...argv.options
     };
     const request = await fetch(url, fetch_options).then(res=>res.json());
-    return request.data;
+    return request;
     /* 
     * Ask kyle about wether I should return `request` or `request.data`
     */
