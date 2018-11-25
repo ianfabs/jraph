@@ -27,14 +27,10 @@ async function jraph(argv: JraphOptions){
     const fetch_options = {
         headers,
         body: body,
-        method: "POST",
         ...argv.options
     };
     const request = await fetch(url, fetch_options).then(res=>res.json());
     return request;
-    /* 
-    * Ask kyle about wether I should return `request` or `request.data`
-    */
 }
 
 export default jraph;
