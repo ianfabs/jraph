@@ -6,14 +6,18 @@ let {jraph, JraphQuery} = require('../dist/index');
 
 describe('jraph()', () => {
     it('should return a json object with property `data`', () => {
-        let options = new JraphQuery();
-        options.url = 'https://csb-8kj415zvx9-yaccgwjitv.now.sh/';
-        options.options.method = "POST";
-        options.query = `{
-            posts{
-                content
-            }
-        }`
+        let options = new JraphQuery({
+            url: 'https://csb-8kj415zvx9-yaccgwjitv.now.sh/',
+            options: {
+                method: "POST"
+            },
+            query: `{
+                posts{
+                    content
+                }
+            }`
+        });
+
         let testPromise = new Promise( function(resolve, reject){
             resolve(jraph(options));
         } );
