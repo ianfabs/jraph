@@ -9,24 +9,46 @@ jraph is written in typescript, but can be used in both a VanillaJS and a TypeSc
 
 [![Edit GraphQL Example API](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/xpwq1o2824?autoresize=1&hidenavigation=1)
 
-### VanillaJS
-Here is an example of how you would go about implementing it in plain old javascript:
+### VanillaJS Examples
+
+#### Queries
 ```js
-    import jraph from 'jraph';
+    import {jraph, JraphQuery} from 'jraph';
 
     async function getItems(){
-        return jraph({
-            url: "https://xpwq1o2824.sse.codesandbox.io/",
+        const JraphConfig = new JraphQuery({
+            url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
             options: {
                 method: "POST"
             },
-            query: `{
+            query:`{
                 items{
                     title
                     info
                 }
             }`
         });
+        return jraph(JraphConfig);
+    }
+```
+
+#### Mutations
+```js
+    import {jraph, JraphMutation} from 'jraph';
+
+    async function addItems(){
+        const JraphConfig = new JraphMutation({
+            url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
+            options: {
+                method: "POST"
+            },
+            mutation:`{
+                addItem(title: "Eggs", info: "Cumberbatch"){
+                    content
+                }
+            }`;
+        });
+        return jraph(JraphConfig);
     }
 ```
 
