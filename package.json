@@ -16,6 +16,10 @@
   ],
   "author": "Ian Fabs",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/ianfabs/jraph.git",
+    "type": "github"
+  },
   "dependencies": {
     "typescript": "^3.1.6",
     "es6-promise": "^4.2.5",
