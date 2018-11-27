@@ -10,7 +10,9 @@
     "test": "mocha --recursive \"./test/**/*.js\""
   },
   "keywords": [
-    "graphql"
+    "graphql", 
+    "javascript",
+    "fetch"
   ],
   "author": "Ian Fabs",
   "license": "MIT",
