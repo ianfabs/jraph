@@ -1,48 +1,52 @@
 import es6 from 'es6-promise';
 es6.polyfill();
-
 import 'isomorphic-fetch';
 
 interface JraphBasic{
-    url: string | Request;
+    uri: string;
     options: any;
 }
-abstract class JraphQuery implements JraphBasic{
-    url: string = "";
-    options: any = {};
-    query: string = "";
-    constructor(args: any){
-        Object.assign(this, args);
-    }
-}
-abstract class JraphMutation implements JraphBasic{
-    url: string = "";
-    options: any = {};
-    mutation: string = "";
-    constructor(args: any){
-        Object.assign(this, args);
-    }
+
+type JraphOptions = JraphBasic;
+
+function cleanQueryString(string: string):string{
+    //This removes whitespaces and slashes and '\n's
+    return string.replace(/([\\][n])?([\s])+/g, " ");
 }
 
-type JraphOptions = JraphQuery | JraphMutation;
+function prepareFetchBody(queryString: string):string{   
+    return JSON.stringify({ query: queryString });
+}
 
-async function jraph(argv: JraphOptions){
-    const url : string | Request = argv.url;
+function jraph(args: JraphOptions){
+    let uri : string = args.uri;
     const headers = { 'Content-Type': 'application/json' };
-    const body = JSON.stringify( { query: ( (argv instanceof JraphQuery) ? argv.query : `mutation ${argv.mutation}`).replace(/([\\][n])?([\s])+/g, " ") } );
-    //(argv instanceof JraphQuery) ? {query: argv.query} : { query: `mutation ${argv.mutation.replace(/([\\][n])?([\s])+/g, " ")}`} );
-    const fetch_options = {
+    let options = args.options;
+    if(!options.method) options.method = "POST";
+    let fetch_options = {
         headers,
-        body: body,
-        ...argv.options
+        ...options
     };
-    console.log(body);
-    const request = await fetch(url, fetch_options).then(res=>res.json());
-    return request;
+    return async (args: string[])=>{
+        console.log(args);
+        let queryString = args.join("");
+        queryString = cleanQueryString(queryString);
+        let url = new URL(uri);
+        if(options.method && (options.method == "GET" || options.method == "get")) {
+            let searchParams = url.searchParams;
+            searchParams.append("query", queryString);
+            fetch_options = {...fetch_options};
+        }else {
+            let body = prepareFetchBody(queryString);
+            fetch_options = {...fetch_options, body};
+        }
+        const request = await fetch(String(url), fetch_options).then(res=>res.json());
+        return request;
+    };
 }
 /* 
 * Some notes for the next version
 *   - Nevermind, I had notes but they were redundant.
 */
+export { jraph, JraphOptions }
 export default jraph;
-export { jraph, JraphOptions, JraphQuery, JraphMutation }
