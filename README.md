@@ -13,42 +13,55 @@ jraph is written in typescript, but can be used in both a VanillaJS and a TypeSc
 
 #### Queries
 ```js
-    import {jraph, JraphQuery} from 'jraph';
+    import {jraph} from 'jraph';
 
     async function getItems(){
-        const JraphConfig = new JraphQuery({
+        const jql = jraph({
             url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
             options: {
                 method: "POST"
-            },
-            query:`{
+            }
+        });
+        return (
+            jql`
+            query{
                 items{
                     title
                     info
                 }
             }`
-        });
-        return jraph(JraphConfig);
+        );
+    }
+
+    async function showStuff(){
+        console.log(await getItems())
     }
 ```
 
 #### Mutations
 ```js
-    import {jraph, JraphMutation} from 'jraph';
+    import {jraph} from 'jraph';
 
-    async function addItems(){
-        const JraphConfig = new JraphMutation({
+    async function addItem(){
+        const jql = jraph({
             url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
             options: {
                 method: "POST"
-            },
-            mutation:`{
-                addItem(title: "Eggs", info: "Cumberbatch"){
-                    content
-                }
-            }`;
+            }
         });
-        return jraph(JraphConfig);
+        return (
+            jql`
+            mutation{
+                addItem(title: "egg", info: "salad"){
+                    title
+                    info
+                }
+            }`
+        );
+    }
+
+    async function showStuff(){
+        console.log(await addItem())
     }
 ```
 
