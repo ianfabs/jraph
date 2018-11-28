@@ -27,9 +27,13 @@ function jraph(args: JraphOptions){
         headers,
         ...options
     };
-    return async (args: string[])=>{
+    return async (args: string[], ...values:any)=>{
         console.log(args);
-        let queryString = args.join("");
+        //let queryString = args.join("");
+        let queryString = "";
+        args.forEach( (string, i) => {
+            queryString += string + (values[i] || '');
+        });
         queryString = cleanQueryString(queryString);
         let url = new URL(uri);
         if(options.method && (options.method == "GET" || options.method == "get")) {
