@@ -1,5 +1,3 @@
-import es6 from 'es6-promise';
-es6.polyfill();
 import 'isomorphic-fetch';
 
 interface JraphBasic{
