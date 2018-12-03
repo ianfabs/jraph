@@ -6,11 +6,11 @@
 [![bundlephobia](https://badgen.net/bundlephobia/minzip/jraph)](https://bundlephobia.com/result?p=jraph@1.4.0) 
 [![total downloads](https://badgen.net/npm/dt/jraph)](https://badgen.net/npm/dt/jraph) 
 
+[![Build Status](https://travis-ci.org/ianfabs/jraph.svg?branch=master)](https://travis-ci.org/ianfabs/jraph)
 [![last commit](https://badgen.net/github/last-commit/ianfabs/jraph)](https://badgen.net/github/last-commit/ianfabs/jraph) 
 [![license](https://badgen.net/github/license/ianfabs/jraph)](https://badgen.net/github/license/ianfabs/jraph) 
 
-[![license](https://badgen.net/badge//graphql?icon=graphql)](https://badgen.net/badge//graphql?icon=graphql) 
-
+[![graphql](https://badgen.net/badge//graphql?icon=graphql)](https://badgen.net/badge//graphql?icon=graphql) 
 
 [![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/) 
 
