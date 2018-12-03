@@ -24,8 +24,7 @@
     "url": "https://github.com/ianfabs/jraph.git",
     "type": "github"
   },
-  "dependencies": {},
-  "peerDependencies": {
+  "dependencies": {
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
