@@ -1,4 +1,25 @@
-import 'isomorphic-fetch';
+//My own implementation of isomorphic fetch, so that I could make jraph smaller
+if(typeof global !== 'undefined'){
+    const realFetch = require('node-fetch');
+    let fetch = function(url:any, options:any) {
+        if (/^\/\//.test(url)) {
+            url = 'https:' + url;
+        }
+        // @ts-ignore
+        return realFetch.call(this, url, options);
+    };
+    // @ts-ignore
+    if (!global.fetch) {
+        // @ts-ignore
+        global.fetch = fetch;
+        // @ts-ignore
+        global.Response = realFetch.Response;
+        // @ts-ignore
+        global.Headers = realFetch.Headers;
+        // @ts-ignore
+        global.Request = realFetch.Request;
+    }
+}
 
 interface JraphBasic{
     url: string ;
