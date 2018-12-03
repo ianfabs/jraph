@@ -1,7 +1,18 @@
 # jraph
 ## A simple fetch-wrapper for making GraphQL API calls in a jiff!
 
-[![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/)
+
+[![version](https://badgen.net/npm/v/jraph)](https://badgen.net/npm/v/jraph) 
+[![bundlephobia](https://badgen.net/bundlephobia/minzip/jraph)](https://bundlephobia.com/result?p=jraph@1.4.0) 
+[![total downloads](https://badgen.net/npm/dt/jraph)](https://badgen.net/npm/dt/jraph) 
+
+[![last commit](https://badgen.net/github/last-commit/ianfabs/jraph)](https://badgen.net/github/last-commit/ianfabs/jraph) 
+[![license](https://badgen.net/github/license/ianfabs/jraph)](https://badgen.net/github/license/ianfabs/jraph) 
+
+[![license](https://badgen.net/badge//graphql?icon=graphql)](https://badgen.net/badge//graphql?icon=graphql) 
+
+
+[![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/) 
 
 jraph is written in typescript, but can be used in both a VanillaJS and a TypeScript context.
 
