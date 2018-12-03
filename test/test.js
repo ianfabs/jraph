@@ -3,7 +3,8 @@ var chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 //const assert = require('assert');
-let {jraph} = require('../dist/index');
+const path = require("path");
+let { jraph } = require(path.resolve("dist/index.js"));
 
 describe('jraph() with basic query', () => {
     it('should return a json object with property `data`', () => {
