@@ -6,7 +6,6 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "pretest": "npm install && npm run build",
     "test": "mocha --recursive \"./test/**/*.js\"",
     "preversion": "npm test",
     "version": "npm run build && git add -A .",
@@ -15,6 +14,8 @@
   "keywords": [
     "graphql",
     "javascript",
+    "typescript",
+    "isomorphic",
     "fetch"
   ],
   "author": "Ian Fabs",
@@ -23,14 +24,14 @@
     "url": "https://github.com/ianfabs/jraph.git",
     "type": "github"
   },
-  "dependencies": {
-    "@types/node": "^10.12.12",
+  "dependencies": {},
+  "peerDependencies": {
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "mocha": "^5.2.0",
-    "typescript": "^3.2.1"
+    "typescript": "^3.1.6"
   }
 }
