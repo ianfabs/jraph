@@ -26,6 +26,7 @@
     "type": "github"
   },
   "dependencies": {
+    "@types/node": "^10.12.12",
     "node-fetch": "^2.3.0"
   },
   "devDependencies": {
