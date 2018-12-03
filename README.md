@@ -1,6 +1,8 @@
 # jraph
 ## A simple fetch-wrapper for making GraphQL API calls in a jiff!
 
+[![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/)
+
 jraph is written in typescript, but can be used in both a VanillaJS and a TypeScript context.
 
 <small>
