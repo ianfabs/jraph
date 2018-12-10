@@ -2,22 +2,14 @@ const chai = require("chai");
 const chaiAsPromised = require("chai-as-promised");
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-let {
-  jraph,
-  JraphOptions
-} = require('../dist/index');
+let {jraph} = require('../dist/index');
 
 describe('jraph query', () => {
-  it('should return a json object with property `data`', () => {
-    //===============================================================
+  let jql = jraph("https://csb-xpwq1o2824-xravvsjkul.now.sh/", {
+    method: "POST"
+  });
 
-    let jql = jraph({
-      uri: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
-      options: {method: "POST"}
-    });
-
-    let results = 
-    jql`
+  let results = jql`
       query{
         items{
           title
@@ -25,13 +17,21 @@ describe('jraph query', () => {
       }
     `;
 
-    //================================================================
-    let testPromise = new Promise(function (resolve, reject) {
-      resolve(results);
-    });
+  let testPromise = new Promise(function (resolve, reject) {
+    resolve(results);
+  });
+
+  it('should be ok', ()=>{
+    return testPromise.then(function (result) {
+      expect(result).to.be.ok;
+    })
+  });
+
+  it('should return a json object with property `data`', () => {
     return testPromise.then(function (result) {
       console.log(result);
-      expect(result).to.have.property("data");
+      expect(result).to.have.property("data")
     })
-  })
+  });
+
 });
