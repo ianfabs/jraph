@@ -16,15 +16,14 @@ jraph is written in typescript, but can be used in both a VanillaJS and a TypeSc
     import {jraph} from 'jraph';
 
     async function getItems(){
-        const jql = jraph({
-            url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
-            options: {
+        const jql = jraph(
+            "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
+            {
                 method: "POST"
             }
         });
         return (
-            jql`
-            query{
+            jql`{
                 items{
                     title
                     info
@@ -43,9 +42,9 @@ jraph is written in typescript, but can be used in both a VanillaJS and a TypeSc
     import {jraph} from 'jraph';
 
     async function addItem(){
-        const jql = jraph({
-            url: "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
-            options: {
+        const jql = jraph(
+            "https://csb-xpwq1o2824-alczxhlphl.now.sh/",
+            {
                 method: "POST"
             }
         });
