@@ -6,8 +6,11 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "version": "tsc && npm publish",
-    "test": "npm run build && mocha --recursive \"./test/**/*.js\""
+    "pretest": "npm install && npm run build",
+    "test": "mocha --recursive \"./test/**/*.js\"",
+    "preversion": "npm test",
+    "version": "npm run build && git add -A .",
+    "postversion": "git push && git push --tags && npm publish"
   },
   "keywords": [
     "graphql",
