@@ -1,13 +1,25 @@
-import es6 from 'es6-promise';
-es6.polyfill();
-import 'isomorphic-fetch';
 
-interface JraphBasic{
-    uri: string;
-    options: any;
+if(typeof global !== 'undefined'){
+    const realFetch = require('node-fetch');
+    let fetch = function(url:any, options:any) {
+        if (/^\/\//.test(url)) {
+            url = 'https:' + url;
+        }
+        // @ts-ignore
+        return realFetch.call(this, url, options);
+    };
+    // @ts-ignore
+    if (!global.fetch) {
+        // @ts-ignore
+        global.fetch = fetch;
+        // @ts-ignore
+        global.Response = realFetch.Response;
+        // @ts-ignore
+        global.Headers = realFetch.Headers;
+        // @ts-ignore
+        global.Request = realFetch.Request;
+    }
 }
-
-type JraphOptions = JraphBasic;
 
 function cleanQueryString(string: string):string{
     //This removes whitespaces and slashes and '\n's
@@ -18,39 +30,36 @@ function prepareFetchBody(queryString: string):string{
     return JSON.stringify({ query: queryString });
 }
 
-function jraph(args: JraphOptions){
-    let uri : string = args.uri;
+function jraph(uri: string, args: object): any{
     const headers = { 'Content-Type': 'application/json' };
-    let options = args.options;
-    if(!options.method) options.method = "POST";
     let fetch_options = {
+        method: "POST",
+        body: "",
+        ...args,
         headers,
-        ...options
     };
     return async (args: string[], ...values:any)=>{
-        console.log(args);
-        //let queryString = args.join("");
         let queryString = "";
         args.forEach( (string, i) => {
             queryString += string + (values[i] || '');
         });
         queryString = cleanQueryString(queryString);
         let url = new URL(uri);
-        if(options.method && (options.method == "GET" || options.method == "get")) {
+        if(fetch_options.method && (fetch_options.method == "GET" || fetch_options.method == "get")) {
             let searchParams = url.searchParams;
             searchParams.append("query", queryString);
-            fetch_options = {...fetch_options};
         }else {
             let body = prepareFetchBody(queryString);
             fetch_options = {...fetch_options, body};
         }
-        const request = await fetch(String(url), fetch_options).then(res=>res.json());
-        return request;
+        const request = await fetch(String(url), fetch_options).then(res=>res.text());
+        try{
+            let json = JSON.parse(request);
+            return json;
+        }catch(e){
+            return request;
+        }
     };
 }
-/* 
-* Some notes for the next version
-*   - Nevermind, I had notes but they were redundant.
-*/
-export { jraph, JraphOptions }
-export default jraph;
+
+export { jraph }
