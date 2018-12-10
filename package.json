@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "version": "tsc && npm publish",
-    "test": "mocha --recursive \"./test/**/*.js\""
+    "test": "npm run build && mocha --recursive \"./test/**/*.js\""
   },
   "keywords": [
     "graphql",
@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "typescript": "^3.1.6",
-    "es6-promise": "^4.2.5",
-    "isomorphic-fetch": "^2.2.1"
+    "node-fetch": "^1.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
