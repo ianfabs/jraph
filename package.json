@@ -20,7 +20,7 @@
   "author": "Ian Fabs",
   "license": "MIT",
   "repository": {
-    "url": "https://github.com/ianfabs/jraph.git",
+    "url": "https://github.com/ianfabs/jraph/tree/gql",
     "type": "github"
   },
   "dependencies": {
