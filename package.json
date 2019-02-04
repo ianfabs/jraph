@@ -8,7 +8,7 @@
     "build": "tsc",
     "pretest": "npm install && npm run build",
     "test": "mocha --recursive \"./test/**/*.js\"",
-    "preversion": "npm test",
+    "preversion": "",
     "version": "npm run build && git add -A .",
     "postversion": "git push && git push --tags && npm publish"
   },
