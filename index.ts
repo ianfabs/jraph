@@ -1,48 +1,41 @@
-//My own implementation of isomorphic fetch, so that I could make jraph smaller
-if(typeof global !== 'undefined'){
-    const realFetch = require('node-fetch');
-    let fetch = function(url:any, options:any) {
-        if (/^\/\//.test(url)) {
-            url = 'https:' + url;
-        }
-        // @ts-ignore
-        return realFetch.call(this, url, options);
-    };
-    // @ts-ignore
-    if (!global.fetch) {
-        // @ts-ignore
-        global.fetch = fetch;
-        // @ts-ignore
-        global.Response = realFetch.Response;
-        // @ts-ignore
-        global.Headers = realFetch.Headers;
-        // @ts-ignore
-        global.Request = realFetch.Request;
-    }
+function cleanQueryString(string: string):string{
+    //This removes whitespaces and slashes and '\n's
+    return string.replace(/([\\][n])?([\s])+/g, " ");
 }
 
-interface JraphBasic{
-    url: string ;
-    options: any;
-    query: string;
+function prepareFetchBody(queryString: string):string{   
+    return JSON.stringify({ query: queryString });
 }
 
-type JraphOptions = JraphBasic;
-
-async function jraph(argv: JraphOptions){
-    const url: string = argv.url;
+const jraph = (url: string, options: any) => {
     const headers = { 'Content-Type': 'application/json' };
-    const body = JSON.stringify( { query: (argv.query).replace(/([\\][n])?([\s])+/g, " ") } );
-    const fetch_options = {
+    let fetch_options = {
         method: "POST",
-        //Defaults go before this line
-        ...argv.options,
-        //Perms go after
-        body,
+        body: null,
         headers,
+        //Defaults go before this line
+        ...options,
+        //Perms go after
     };
-    //const request = await fetch(url, fetch_options).then(res=>res.json());
-    return fetch(url, fetch_options).then(res=>res.json());
+    return async (args: string[], ...values: any): Promise<any> =>{
+        let queryString = "";
+        args.forEach( (s, i) => {
+            queryString += s + (values[i] || '');
+        });
+        queryString = cleanQueryString(queryString);
+        let body = prepareFetchBody(queryString);
+        fetch_options = {...fetch_options, body};
+        const request = await fetch(url, fetch_options).then(res=>res.text());
+        try{
+            let json = JSON.parse(request);
+            return json;
+        }catch(error){
+            return {
+                request,
+                error
+            };
+        }
+    };
 }
-export { jraph, JraphOptions }
-export default jraph;
+
+export { jraph };
