@@ -1,6 +1,6 @@
 {
   "name": "jraph",
-  "version": "3.3.1",
+  "version": "3.3.3",
   "description": "A fetch wrapper for GraphQL",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -8,7 +8,7 @@
     "build": "tsc",
     "pretest": "npm install && npm run build",
     "test": "mocha --recursive \"./test/**/*.js\"",
-    "preversion": "",
+    "preversion": "npm ci",
     "version": "npm run build && git add -A .",
     "postversion": "git push && git push --tags && npm publish"
   },
