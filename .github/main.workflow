@@ -1,6 +1,6 @@
 workflow "build and test" {
   on = "push"
-  resolves = ["test", "coverage", "lint"]
+  resolves = ["test", "lint"]
 }
 
 action "build" {
