@@ -10,7 +10,7 @@
     "test": "mocha --recursive \"./test/**/*.js\"",
     "preversion": "npm ci",
     "version": "npm run build && git add -A .",
-    "postversion": "git push && git push --tags && npm publish"
+    "postversion": "git push && git push --tags"
   },
   "keywords": [
     "graphql",
