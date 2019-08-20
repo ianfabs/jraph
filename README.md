@@ -14,7 +14,7 @@ Designed to feel similar to using apollo's graphql-tag function.
 
 [![graphql](https://badgen.net/badge//graphql?icon=graphql)](https://badgen.net/badge//graphql?icon=graphql) 
 
-[![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/) 
+[![NPM](https://nodei.co/npm/jraph.png?mini=true)](https://nodei.co/npm/jraph/) [![Join the chat at https://gitter.im/jraph-/community](https://badges.gitter.im/jraph-/community.svg)](https://gitter.im/jraph-/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
 
 ### Options
 
