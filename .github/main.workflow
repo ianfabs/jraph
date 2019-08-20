@@ -14,12 +14,6 @@ action "test" {
   args = "t"
 }
 
-action "coverage" {
-  needs = "build"
-  uses = "actions/npm@master"
-  args = "run coverage"
-}
-
 action "lint" {
   needs = "build"
   uses = "actions/npm@master"
