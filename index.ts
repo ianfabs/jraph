@@ -3,7 +3,7 @@ const jraph = (url: string, options: any) => {
     const request = await fetch(url, {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({query: args.reduce((a, v, i) => a + v + vals[i]).replace(/([\\][n])?([\s])+/g, " "),}),
+      body: JSON.stringify({query: args.reduce((a, v, i) => a + v + vals[i])}),
       ...options,
     });
     try {
